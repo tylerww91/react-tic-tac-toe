@@ -15,17 +15,6 @@ function App() {
     setBoard,
   } = useContext(GameContext);
 
-  console.log(
-    active,
-    setActive,
-    currentPlayer,
-    setCurrentPlayer,
-    gameMessage,
-    setGameMessage,
-    board,
-    setBoard
-  );
-
   return (
     <div className="App">
       <Board />

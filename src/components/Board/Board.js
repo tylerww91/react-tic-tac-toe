@@ -8,8 +8,8 @@ export default function Board() {
   return (
     <main className="main">
       <div className="board-container">
-        {board.map((box, i) => (
-          <Box key={i} {...{ box }} />
+        {board.map(({ content, space }) => (
+          <Box key={space} {...{ content, space }} />
         ))}
       </div>
     </main>
