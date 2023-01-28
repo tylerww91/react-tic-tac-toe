@@ -48,7 +48,6 @@ const GameProvider = ({ children }) => {
     { space: '8', content: '' },
   ];
 
-  console.log(resetState);
   const checkWinner = () => {
     if (
       board[0].content === board[1].content &&
@@ -120,8 +119,6 @@ const GameProvider = ({ children }) => {
 
   const resetClick = (resetState) => {
     setBoard(resetState);
-    // board.map(() => {
-    // });
     setActive(true);
     setCurrentPlayer('X');
     setGameMessage(`X's Turn`);

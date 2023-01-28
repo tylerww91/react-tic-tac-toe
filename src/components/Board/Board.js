@@ -4,7 +4,7 @@ import Box from '../Box/Box.js';
 import './Board.css';
 
 export default function Board() {
-  const { board, setBoard } = useContext(GameContext);
+  const { board } = useContext(GameContext);
   return (
     <main className="main">
       <div className="board-container">
