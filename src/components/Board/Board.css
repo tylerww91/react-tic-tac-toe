@@ -22,6 +22,7 @@
 .board-container {
   display: flex;
   flex-wrap: wrap;
+  /* 470 before phone sizine */
   height: 370px;
   width: 370px;
   background-color: #363852;

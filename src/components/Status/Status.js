@@ -1,13 +1,16 @@
 import React, { useContext } from 'react';
 import { GameContext } from '../../context/GameContext.js';
+import './Status.css';
 
 export default function Status() {
-  const { gameMessage, resetClick, resetState } = useContext(GameContext);
+  const { gameMessage, resetClick, resetState, active } = useContext(GameContext);
 
   return (
     <div>
       <p>{gameMessage}</p>
-      <button onClick={() => resetClick(resetState)}>RESET</button>
+      <button className={`${active}`} onClick={() => resetClick(resetState)}>
+        RESET
+      </button>
     </div>
   );
 }
