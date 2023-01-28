@@ -17,10 +17,9 @@ const GameProvider = ({ children }) => {
   ]);
   const [currentPlayer, setCurrentPlayer] = useState('X');
   const [active, setActive] = useState(true);
-  const [gameMessage, setGameMessage] = useState();
+  const [gameMessage, setGameMessage] = useState(`X's Turn`);
 
   const spaceClick = (content, space, oldContent) => {
-    console.log(content, space);
     if (!active) return;
     if (oldContent) return;
     setBoard((prevState) =>
@@ -30,8 +29,103 @@ const GameProvider = ({ children }) => {
       })
     );
     setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
+    setGameMessage(`${newPlayer}'s turn!`);
   };
 
+  let newPlayer = currentPlayer;
+  if (currentPlayer === 'X') newPlayer = 'O';
+  if (currentPlayer === 'O') newPlayer = 'X';
+
+  const resetState = [
+    { space: '0', content: '' },
+    { space: '1', content: '' },
+    { space: '2', content: '' },
+    { space: '3', content: '' },
+    { space: '4', content: '' },
+    { space: '5', content: '' },
+    { space: '6', content: '' },
+    { space: '7', content: '' },
+    { space: '8', content: '' },
+  ];
+
+  console.log(resetState);
+  const checkWinner = () => {
+    if (
+      board[0].content === board[1].content &&
+      board[1].content === board[2].content &&
+      board[0].content !== ''
+    )
+      return board[0].content;
+    if (
+      board[0].content === board[4].content &&
+      board[4].content === board[8].content &&
+      board[0].content !== ''
+    )
+      return board[0].content;
+    if (
+      board[3].content === board[4].content &&
+      board[4].content === board[5].content &&
+      board[3].content !== ''
+    )
+      return board[3].content;
+    if (
+      board[6].content === board[7].content &&
+      board[7].content === board[8].content &&
+      board[8].content !== ''
+    )
+      return board[8].content;
+    if (
+      board[0].content === board[3].content &&
+      board[3].content === board[6].content &&
+      board[6].content !== ''
+    )
+      return board[6].content;
+    if (
+      board[1].content === board[4].content &&
+      board[4].content === board[7].content &&
+      board[7].content !== ''
+    )
+      return board[7].content;
+    if (
+      board[2].content === board[5].content &&
+      board[5].content === board[8].content &&
+      board[8].content !== ''
+    )
+      return board[8].content;
+    if (
+      board[6].content === board[4].content &&
+      board[4].content === board[2].content &&
+      board[2].content !== ''
+    )
+      return board[2].content;
+  };
+
+  const isTie = () => {
+    if (board.every((box) => box.content !== '')) return true;
+  };
+
+  const checkGameStatus = () => {
+    if (!active) return;
+    const winner = checkWinner();
+    if (winner) {
+      setGameMessage(`Player ${winner} Wins!`);
+      setActive(false);
+    } else if (isTie()) {
+      setGameMessage('Cats Game!');
+      setActive(false);
+    }
+  };
+
+  checkGameStatus();
+
+  const resetClick = (resetState) => {
+    setBoard(resetState);
+    // board.map(() => {
+    // });
+    setActive(true);
+    setCurrentPlayer('X');
+    setGameMessage(`X's Turn`);
+  };
   return (
     <GameContext.Provider
       value={{
@@ -44,6 +138,9 @@ const GameProvider = ({ children }) => {
         board,
         setBoard,
         spaceClick,
+        checkWinner,
+        resetState,
+        resetClick,
       }}
     >
       {children}
