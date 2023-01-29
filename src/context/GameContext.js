@@ -18,6 +18,7 @@ const GameProvider = ({ children }) => {
   const [currentPlayer, setCurrentPlayer] = useState('X');
   const [active, setActive] = useState(true);
   const [gameMessage, setGameMessage] = useState(`X's Turn`);
+  const [isReset, setIsReset] = useState(false);
 
   const spaceClick = (content, space, oldContent) => {
     if (!active) return;
@@ -30,6 +31,7 @@ const GameProvider = ({ children }) => {
     );
     setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
     setGameMessage(`${newPlayer}'s turn!`);
+    setIsReset(false);
   };
 
   let newPlayer = currentPlayer;
@@ -118,10 +120,13 @@ const GameProvider = ({ children }) => {
   checkGameStatus();
 
   const resetClick = (resetState) => {
-    setBoard(resetState);
-    setActive(true);
-    setCurrentPlayer('X');
-    setGameMessage(`X's Turn`);
+    setIsReset(true);
+    setTimeout(() => {
+      setBoard(resetState);
+      setActive(true);
+      setCurrentPlayer('X');
+      setGameMessage(`X's Turn`);
+    }, 1400);
   };
   return (
     <GameContext.Provider
@@ -138,6 +143,7 @@ const GameProvider = ({ children }) => {
         checkWinner,
         resetState,
         resetClick,
+        isReset,
       }}
     >
       {children}

@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { GameContext } from '../../context/GameContext.js';
+import reset from '../../restart.png';
 import './Status.css';
 
 export default function Status() {
@@ -9,7 +10,7 @@ export default function Status() {
     <div>
       <p>{gameMessage}</p>
       <button className={`${active}`} onClick={() => resetClick(resetState)}>
-        RESET
+        <img src={reset}></img>
       </button>
     </div>
   );

@@ -1,9 +1,8 @@
 /* Main styling */
 .main {
   display: flex;
-  height: 100vh;
+  height: 85vh;
   justify-content: center;
-  align-items: center;
   background-color: #4a4e69;
   background-size: cover;
 }
@@ -31,7 +30,28 @@
   gap: 2px;
   padding: 6px;
 }
+.true-anim {
+  animation: flip 2s;
+}
 
+@keyframes flip {
+  0%,
+  5% {
+    transform: translateX(-5px) rotate(-2deg);
+  }
+
+  30% {
+    transform: translateX(15px) rotate(6deg);
+  }
+
+  45% {
+    transform: translateX(-15px) rotate(-3.6deg);
+  }
+
+  50% {
+    transform: rotateY(360deg);
+  }
+}
 /* Squares */
 .board-container * {
   height: 114px;
