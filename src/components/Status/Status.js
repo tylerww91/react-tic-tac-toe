@@ -7,7 +7,7 @@ export default function Status() {
   const { gameMessage, resetClick, resetState, active } = useContext(GameContext);
 
   return (
-    <div>
+    <div className='status-container'>
       <p>{gameMessage}</p>
       <button className={`${active}`} onClick={() => resetClick(resetState)}>
         <img src={reset}></img>
