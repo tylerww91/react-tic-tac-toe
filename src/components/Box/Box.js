@@ -7,7 +7,6 @@ export default function Box({ content, space }) {
     <div
       //if content is set to X / content isn't '' return X otherwise O
       className={content}
-      // className={content === 'X' && content !== '' ? 'X' : 'O'}
       onClick={() => spaceClick(currentPlayer, space, content)}
     ></div>
   );
